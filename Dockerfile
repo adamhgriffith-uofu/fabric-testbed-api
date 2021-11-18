@@ -15,6 +15,10 @@ COPY ./requirements.txt ./
 RUN pip3 install -r ./requirements.txt
 RUN python -m bash_kernel.install
 
+# git config
+RUN git config --global user.email "horkle@snorkle.com" && \
+    git config --global user.name "Horkle Snorkle Porkchop"
+
 # Volumes:
 VOLUME /access
 VOLUME /work
