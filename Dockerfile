@@ -2,13 +2,13 @@
 FROM python:3.9.9-buster
 
 # Global variables:
-ENV FABRIC_CREDMGR_HOST = cm.fabric-testbed.net
-ENV FABRIC_ORCHESTRATOR_HOST = orchestrator.fabric-testbed.net
+ENV FABRIC_CREDMGR_HOST=cm.fabric-testbed.net
+ENV FABRIC_ORCHESTRATOR_HOST=orchestrator.fabric-testbed.net
 
 # Access management variables:
-ENV BASTION_PRIVATE_KEY = /access/keys/id_rsa
-ENV FABRIC_TOKEN_LOCATION = /access/tokens/fabric-identity-token.json
-ENV CILOGON_REFRESH_TOKEN = /access/tokens/fabric-refresh-token.json
+ENV BASTION_PRIVATE_KEY=/access/keys/id_rsa
+ENV FABRIC_TOKEN_LOCATION=/access/tokens/fabric-identity-token.json
+ENV CILOGON_REFRESH_TOKEN=/access/tokens/fabric-refresh-token.json
 
 # Install remaining packages:
 COPY ./requirements.txt ./
