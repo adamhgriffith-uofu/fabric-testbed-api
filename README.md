@@ -25,7 +25,7 @@ docker build --file Dockerfile --tag fabric-jupyter:latest .
 Mount the `/access` and `/work` directories in this repository to the container and publish the Jupyter notebook server port.
 
 ```shell
-docker run -it -p 8888:8888 -v /<repo-location>/access:/access -v /<repo-location>/work:/work
+docker run -it -p 8888:8888 -v /<repo-location>/access:/access -v /<repo-location>/work:/work fabric-jupyter:latest
 ```
 
 Follow the prompts to complete the SSH key generation.
