@@ -30,7 +30,7 @@ docker run -it -p 8888:8888 -v /<repo-location>/access:/access -v /<repo-locatio
 
 Follow the prompts to complete the SSH key generation.
 
-Finally Jupyter in your web browser by clicking one of the URLs indicated in the console, e.g. [http://127.0.0.1:8888/?token=horklesnorkle](http://127.0.0.1:8888/?token=horklesnorkle).
+Finally, open Jupyter in your web browser by clicking one of the URLs indicated in the console, e.g. [http://127.0.0.1:8888/?token=horklesnorkle](http://127.0.0.1:8888/?token=horklesnorkle).
 
 ## Next Steps
 

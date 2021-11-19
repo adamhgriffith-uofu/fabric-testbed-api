@@ -1,5 +1,6 @@
 
 fabrictestbed
 jupyter
+jupyterthemes
 paramiko
 bash_kernel
