@@ -8,11 +8,11 @@ The ``Dockerfile`` provides the following environmental variables.
 
 | Name | Description |
 | ---  | ---         |
-| BASTION_PRIVATE_KEY | The SSH private key related to the public key sent to the Fabric team for SSH Bastion access (see [Create Token](https://portal.fabric-testbed.net/experiments)). |
-| CILOGON_REFRESH_TOKEN | Fabric's identity token is used to generate this refresh token with a much shorter lifespan (see [Create Token](https://portal.fabric-testbed.net/experiments)). |
-| FABRIC_CREDMGR_HOST | See [Install the FABRIC Python API](https://learn.fabric-testbed.net/knowledge-base/install-the-python-api/#configure-the-environment). |
-| FABRIC_TOKEN_LOCATION | See [Install the FABRIC Python API](https://learn.fabric-testbed.net/knowledge-base/install-the-python-api/#configure-the-environment). |
-| FABRIC_ORCHESTRATOR_HOST | See [Install the FABRIC Python API](https://learn.fabric-testbed.net/knowledge-base/install-the-python-api/#configure-the-environment). |
+| `BASTION_PRIVATE_KEY` | The SSH private key related to the public key sent to the Fabric team for SSH Bastion access (see [Create Token](https://portal.fabric-testbed.net/experiments)). |
+| `CILOGON_REFRESH_TOKEN` | Fabric's identity token is used to generate this refresh token with a much shorter lifespan (see [Create Token](https://portal.fabric-testbed.net/experiments)). |
+| `FABRIC_CREDMGR_HOST` | See [Install the FABRIC Python API](https://learn.fabric-testbed.net/knowledge-base/install-the-python-api/#configure-the-environment). |
+| `FABRIC_TOKEN_LOCATION` | See [Install the FABRIC Python API](https://learn.fabric-testbed.net/knowledge-base/install-the-python-api/#configure-the-environment). |
+| `FABRIC_ORCHESTRATOR_HOST` | See [Install the FABRIC Python API](https://learn.fabric-testbed.net/knowledge-base/install-the-python-api/#configure-the-environment). |
 
 ## Setup
 
