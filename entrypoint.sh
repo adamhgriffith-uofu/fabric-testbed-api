@@ -3,6 +3,10 @@
 # Enable strict mode:
 set -euo pipefail
 
+# Setting the hosts:
+export FABRIC_CREDMGR_HOST=$(cat /access/hosts/FABRIC_CREDMGR_HOST)
+export FABRIC_ORCHESTRATOR_HOST=$(cat /access/hosts/FABRIC_ORCHESTRATOR_HOST)
+
 # Create key files?
 ssh-keygen -t rsa -b 4096 -C "horkle@snorkle.com"
 
