@@ -1,0 +1,5 @@
+[submodule "kubespray"]
+    branch = v2.15.0
+	path = kubespray
+	url = https://github.com/kubernetes-sigs/kubespray.git
+
