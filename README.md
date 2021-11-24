@@ -4,7 +4,7 @@
 
 ## Environmental Variables
 
-The ``Dockerfile`` provides the following environmental variables.
+The `Dockerfile` provides the following environmental variables.
 
 | Name | Description |
 | ---  | ---         |

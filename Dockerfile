@@ -1,15 +1,24 @@
 # syntax=docker/dockerfile:1
 FROM python:3.9.9-buster
 
-# Access management variables:
-ENV BASTION_PRIVATE_KEY=/access/keys/id_rsa
-ENV FABRIC_TOKEN_LOCATION=/access/tokens/fabric-identity-token.json
-ENV CILOGON_REFRESH_TOKEN=/access/tokens/fabric-refresh-token.json
+# Docker image arguments:
+ARG username=fabric
 
 # Install remaining packages:
 COPY ./requirements.txt ./
 RUN pip3 install -r ./requirements.txt
 RUN python -m bash_kernel.install
+
+# Set the SSH private key:
+COPY ./ssh/id_rsa ./.ssh/id_rsa_fabric
+RUN chown ${username}:${username} ./.ssh/id_rsa_fabric
+
+# Set the user:
+RUN useradd -ms /bin/bash ${username}
+WORKDIR /home/${username}
+
+# Switch to SLATE API user:
+USER ${username}
 
 # Configuring git:
 RUN git config --global user.email "horkle@snorkle.com" && \
