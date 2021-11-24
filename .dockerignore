@@ -1,0 +1,9 @@
+
+# IntelliJ
+.idea
+
+# Git
+.git
+.gitattributes
+.gitignore
+.gitmodules
