@@ -1,0 +1,4 @@
+fabric:
+  bastion:
+    hostname: bastion-1.fabric-testbed.net
+    port: 22
