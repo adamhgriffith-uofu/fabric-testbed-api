@@ -27,6 +27,12 @@ The `Dockerfile` provides the following build arguments:
 | `id_rsa_fabric_slice`     | No       | Counterpart to the public key used when the slice is defined and requested. If not specified a new private key will be generated on the fly. |
 | `id_rsa_fabric_slice.pub` | No       | Counterpart to the private key used when the slice is defined and requested. If not specified a new public key will be generated on the fly. |
 
+* **Optional:** Create your own persistent slice keys:
+
+  ```shell
+  ssh-keygen -b 2048 -t rsa -f "/<repo-location>/secrets/ssh/id_rsa_fabric_slice" -q -N ""
+  ```
+
 ## Build and Run
 
 ### Production
