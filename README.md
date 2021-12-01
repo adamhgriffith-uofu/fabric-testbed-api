@@ -55,3 +55,38 @@ Running the image will create a new tagged container and start up Jupyter.
         http://1234abc:8888/?token=asdfasdfasdf
      or http://127.0.0.1:8888/?token=asdfasdfasdf
 ```
+
+## SSH Commands
+
+The `username` and API SSH keys are already applied to `~/.ssh/config` in a standard way. The upshot is that lengthy commands like the following are no longer necessary.
+
+```shell
+ssh -i /path/to/key -J <username>@<bastion-hostname> -i /path/to/another/key <username>@<endpoint-hostname>
+```
+
+Instead, make use of the shorter command below using any of the predefined SSH hosts.
+
+```shell
+ssh <ssh-host>
+```
+
+| SSH Hosts             | Description                       |
+|-----------------------|-----------------------------------|
+| `fabric-bastion-host` | External Fabric SSH Bastion host. |
+
+* Not all Bastion hosts allow direct login. This is expected behavior.
+
+## Persistent Bash History
+
+The `bash` history  is stored in `/work/.bash_history_docker`.
+* If `/work` has been specified as a volume the history will persist between containers.
+
+```shell
+[root@123 ~]# history
+    1  echo 'hello world'
+    2  ls -al
+    3  exit
+    4  history
+    5  exit
+    6  history
+```
