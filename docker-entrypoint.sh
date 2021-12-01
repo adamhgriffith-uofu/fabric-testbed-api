@@ -30,5 +30,4 @@ then
 fi
 
 # Start up Jupyter:
-cd "/work"
-jupyter notebook --no-browser --ip=0.0.0.0 --allow-root
+jupyter notebook --no-browser --ip=0.0.0.0 --allow-root --notebook-dir=/work

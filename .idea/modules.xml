@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/fabric-testbed.iml" filepath="$PROJECT_DIR$/.idea/fabric-testbed.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/fabric-testbed-api.iml" filepath="$PROJECT_DIR$/.idea/fabric-testbed-api.iml" />
     </modules>
   </component>
 </project>
