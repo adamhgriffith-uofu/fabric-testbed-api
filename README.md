@@ -2,7 +2,7 @@
 
 > **_IMPORTANT:_** This repository requires a read-through of [Install the FABRIC Python API](https://learn.fabric-testbed.net/knowledge-base/install-the-python-api/) in order to make any sense.
 
-Containerized Fabric Python API and Jupyter with SSH access.
+Containerized Fabric Python API with Jupyter and SSH.
 
 ## Requirements
 
