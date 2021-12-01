@@ -26,6 +26,8 @@ EOF
 # Create Slice key files:
 if [ ! -f "/root/.ssh/id_rsa_fabric_slice" ]
 then
+  echo "Existing Slice key not found."
+  echo "Generating $HOME/.ssh/id_rsa_fabric_slice key pair on the fly..."
   ssh-keygen -b 2048 -t rsa -f "$HOME/.ssh/id_rsa_fabric_slice" -q -N ""
 fi
 

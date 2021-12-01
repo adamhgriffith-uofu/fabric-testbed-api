@@ -21,11 +21,11 @@ The `Dockerfile` provides the following build arguments:
 * During the build process Docker will copy relevant SSH keys into the image.
 * Please copy all required keys below to `/<repo-location>/secrets/ssh` before building the images.
 
-| Name                      | Required | Description                                                                                                                       |
-|---------------------------|----------|-----------------------------------------------------------------------------------------------------------------------------------|
-| `id_rsa_fabric`           | Yes      | Counterpart to the public key for Fabric and the Bastion servers.                                                                 |
-| `id_rsa_fabric_slice`     | No       | Counterpart to the public key used when the slice is defined and requested. If not specified a new private key will be generated. |
-| `id_rsa_fabric_slice.pub` | No       | Counterpart to the private key used when the slice is defined and requested. If not specified a new public key will be generated. |
+| Name                      | Required | Description                                                                                                                                  |
+|---------------------------|----------|----------------------------------------------------------------------------------------------------------------------------------------------|
+| `id_rsa_fabric`           | Yes      | Counterpart to the public key for Fabric and the Bastion servers.                                                                            |
+| `id_rsa_fabric_slice`     | No       | Counterpart to the public key used when the slice is defined and requested. If not specified a new private key will be generated on the fly. |
+| `id_rsa_fabric_slice.pub` | No       | Counterpart to the private key used when the slice is defined and requested. If not specified a new public key will be generated on the fly. |
 
 ## Build and Run
 
@@ -41,6 +41,8 @@ Running the image will create a new tagged container and start up Jupyter.
 
 ```shell
 [your@localmachine ~]$ docker run -it -p 8888:8888 -v /<repo-location>/work:/work fabric-api:prod
+Existing Slice key not found.
+Generating /root/.ssh/id_rsa_fabric_slice key pair on the fly...
 [I 19:58:14.368 NotebookApp] Writing notebook server cookie secret to /root/.local/share/jupyter/runtime/notebook_cookie_secret
 [I 19:58:14.632 NotebookApp] Serving notebooks from local directory: /work
 [I 19:58:14.632 NotebookApp] Jupyter Notebook 6.4.6 is running at:
