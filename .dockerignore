@@ -1,9 +1,14 @@
 
-# IntelliJ
-.idea
+# IDE Related Items
+/.idea
 
-# Git
+# Git Related Items
 .git
 .gitattributes
+.github
 .gitignore
 .gitmodules
+
+# Other
+LICENSE
+README.md
