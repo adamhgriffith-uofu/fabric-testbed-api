@@ -2,36 +2,49 @@
 FROM python:3.9.9-buster
 
 # Docker image arguments:
-ARG username=fabric
+ARG username
+
+# Docker container environmental variables:
+ENV FABRIC_API_USER=${username}
+ENV FABRIC_ENV=prod
+ENV FABRIC_CREDMGR_HOST=cm.fabric-testbed.net
+ENV FABRIC_ORCHESTRATOR_HOST=orchestrator.fabric-testbed.net
+ENV HISTFILE=/work/.bash_history_docker
 
 # Install remaining packages:
 COPY ./requirements.txt ./
 RUN pip3 install -r ./requirements.txt
 RUN python -m bash_kernel.install
 
-# Set the SSH private key:
-COPY ./ssh/id_rsa ./.ssh/id_rsa_fabric
-RUN chown ${username}:${username} ./.ssh/id_rsa_fabric
+# Prepare entrypoint:
+COPY ./docker-entrypoint.sh ./
+RUN chmod +x ./docker-entrypoint.sh
 
-# Set the user:
-RUN useradd -ms /bin/bash ${username}
-WORKDIR /home/${username}
+# Create the docker directory:
+RUN mkdir /docker
 
-# Switch to SLATE API user:
-USER ${username}
+# Add the SLATE API envs:
+COPY ./envs ./docker/envs
 
-# Configuring git:
-RUN git config --global user.email "horkle@snorkle.com" && \
-    git config --global user.name "Horkle Snorkle Porkchop"
+# Add the scripts:
+COPY ./scripts ./docker/scripts
+RUN chmod +x ./docker/scripts/yml.sh
 
-# Volumes:
-VOLUME /access
-VOLUME /work
+# Change working directory:
+WORKDIR /root
+
+# Set the SSH keys:
+COPY ./secrets/ssh ./.ssh/
+RUN chmod 600 -R ./.ssh/
+
+# Set the work directory:
+RUN mkdir /work
+
+# Volumes
+VOLUME [ "/work" ]
 
 # Ports:
 EXPOSE 8888/tcp
 
 # Run once the container has started:
-COPY ./entrypoint.sh ./
-RUN chmod +x ./entrypoint.sh
-ENTRYPOINT ["./entrypoint.sh"]
+ENTRYPOINT [ "/docker-entrypoint.sh" ]

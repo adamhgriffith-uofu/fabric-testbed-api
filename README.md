@@ -1,44 +1,57 @@
-# Docker and the Fabric Testbed Jupyter Examples
+# Fabric Python API and Jupyter
 
-> **_NOTE:_** This repository requires a read-through of [Install the FABRIC Python API](https://learn.fabric-testbed.net/knowledge-base/install-the-python-api/) in order to make any sense.
+> **_IMPORTANT:_** This repository requires a read-through of [Install the FABRIC Python API](https://learn.fabric-testbed.net/knowledge-base/install-the-python-api/) in order to make any sense.
 
-## Environmental Variables
+Containerized Fabric Python API and Jupyter with SSH access.
 
-The `Dockerfile` provides the following environmental variables.
+## Requirements
 
-| Name | Description |
-| ---  | ---         |
-| `BASTION_PRIVATE_KEY` | The SSH private key related to the public key sent to the Fabric team for SSH Bastion access (see [Create Token](https://portal.fabric-testbed.net/experiments)). |
-| `CILOGON_REFRESH_TOKEN` | Fabric's identity token is used to generate this refresh token with a much shorter lifespan (see [Create Token](https://portal.fabric-testbed.net/experiments)). |
-| `FABRIC_TOKEN_LOCATION` | See [Install the FABRIC Python API](https://learn.fabric-testbed.net/knowledge-base/install-the-python-api/#configure-the-environment). |
+### Dockerfile Arguments
 
-The following must be added to `/access/hosts/` as individual files, e.g. `/access/hosts/FABRIC_CREDMGR_HOST`.
+The `Dockerfile` provides the following build arguments:
 
-| Name | Description |
-| ---  | ---         |
-| `FABRIC_CREDMGR_HOST` | See [Install the FABRIC Python API](https://learn.fabric-testbed.net/knowledge-base/install-the-python-api/#configure-the-environment). |
-| `FABRIC_ORCHESTRATOR_HOST` | See [Install the FABRIC Python API](https://learn.fabric-testbed.net/knowledge-base/install-the-python-api/#configure-the-environment). |
+| Name       | Required | Description                                                  |
+|------------|----------|--------------------------------------------------------------|
+| `username` | Yes      | The Fabric API user name for Fabric and the Bastion servers. |
 
-## Setup
+### SSH Key Files
 
-Build the Docker image.
+> **_NOTE:_** All files added to `/<repo-location>/secrets/ssh` will be ignored by Git so don't worry :).
+
+* During the build process Docker will copy relevant SSH keys into the image.
+* Please copy all required keys below to `/<repo-location>/secrets/ssh` before building the images.
+
+| Name                      | Required | Description                                                                                                                       |
+|---------------------------|----------|-----------------------------------------------------------------------------------------------------------------------------------|
+| `id_rsa_fabric`           | Yes      | Counterpart to the public key for Fabric and the Bastion servers.                                                                 |
+| `id_rsa_fabric_slice`     | No       | Counterpart to the public key used when the slice is defined and requested. If not specified a new private key will be generated. |
+| `id_rsa_fabric_slice.pub` | No       | Counterpart to the private key used when the slice is defined and requested. If not specified a new public key will be generated. |
+
+## Build and Run
+
+### Production
+
+Build the Docker image with production `build-arg`s:
 
 ```shell
-docker build --file Dockerfile --tag fabric-jupyter:latest .
+docker build --file Dockerfile --build-arg username=<username> --tag fabric-api:prod .
 ```
 
-Mount the `/access` and `/work` directories in this repository to the container and publish the Jupyter notebook server port.
+Running the image will create a new tagged container and start up Jupyter.
 
 ```shell
-docker run -it -p 8888:8888 -v /<repo-location>/access:/access -v /<repo-location>/work:/work fabric-jupyter:latest
+[your@localmachine ~]$ docker run -it -p 8888:8888 -v /<repo-location>/work:/work fabric-api:prod
+[I 19:58:14.368 NotebookApp] Writing notebook server cookie secret to /root/.local/share/jupyter/runtime/notebook_cookie_secret
+[I 19:58:14.632 NotebookApp] Serving notebooks from local directory: /work
+[I 19:58:14.632 NotebookApp] Jupyter Notebook 6.4.6 is running at:
+[I 19:58:14.632 NotebookApp] http://1234abc:8888/?token=asdfasdfasdf
+[I 19:58:14.632 NotebookApp]  or http://127.0.0.1:8888/?token=asdfasdfasdf
+[I 19:58:14.632 NotebookApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[C 19:58:14.637 NotebookApp]
+
+    To access the notebook, open this file in a browser:
+        file:///root/.local/share/jupyter/runtime/nbserver-30-open.html
+    Or copy and paste one of these URLs:
+        http://1234abc:8888/?token=asdfasdfasdf
+     or http://127.0.0.1:8888/?token=asdfasdfasdf
 ```
-
-Follow the prompts to complete the SSH key generation.
-
-Finally, open Jupyter in your web browser by clicking one of the URLs indicated in the console, e.g. [http://127.0.0.1:8888/?token=horklesnorkle](http://127.0.0.1:8888/?token=horklesnorkle).
-
-## Next Steps
-
-* Most Jupyter example notebooks reference key pairs in `~/.ssh/`. Not being sure how those are generated goofy files were created with `entrypoint.sh`.
-
-* How and where `CILOGON_REFRESH_TOKEN` is created is still a mystery (see [Create Token](https://portal.fabric-testbed.net/experiments)).
