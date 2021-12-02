@@ -12,6 +12,11 @@ fi
 # Load environmental values:
 source "/docker/scripts/yml.sh"
 create_variables "/docker/envs/${FABRIC_ENV}.yml" "conf_"
+export FABRIC_BASTION_HOST="${conf_fabric_bastion_hostname}"
+export FABRIC_BASTION_HOST_PRIV_IPV4="${conf_fabric_bastion_private_ipv4}"
+export FABRIC_BASTION_HOST_PRIV_IPV6="${conf_fabric_bastion_private_ipv6}"
+export FABRIC_CREDMGR_HOST="${conf_fabric_credmgr_hostname}"
+export FABRIC_ORCHESTRATOR_HOST="${conf_fabric_orchestrator_hostname}"
 
 # Create the SSH configuration file:
 cat > "$HOME/.ssh/config" <<EOF
@@ -32,4 +37,5 @@ then
 fi
 
 # Start up Jupyter:
+jt -t $JUPYTER_THEME
 jupyter notebook --no-browser --ip=0.0.0.0 --allow-root --notebook-dir=/work

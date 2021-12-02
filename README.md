@@ -10,9 +10,10 @@ Containerized Fabric Python API with Jupyter and SSH.
 
 The `Dockerfile` provides the following build arguments:
 
-| Name       | Required | Description                                                  |
-|------------|----------|--------------------------------------------------------------|
-| `username` | Yes      | The Fabric API user name for Fabric and the Bastion servers. |
+| Name           | Required | Description                                                                                                                                                                                     |
+|----------------|----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `jupytertheme` | No       | The theme for the Jupyter notebook environment. If not specified this will be set to `monokai`. See [jupyterthemes](https://github.com/dunovank/jupyter-themes) for a list of available themes. |
+| `username`     | Yes      | The Fabric API user name for Fabric and the Bastion servers.                                                                                                                                    |
 
 ### SSH Key Files
 

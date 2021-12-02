@@ -2,14 +2,14 @@
 FROM python:3.9.9-buster
 
 # Docker image arguments:
+ARG jupytertheme=monokai
 ARG username
 
 # Docker container environmental variables:
 ENV FABRIC_API_USER=${username}
 ENV FABRIC_ENV=prod
-ENV FABRIC_CREDMGR_HOST=cm.fabric-testbed.net
-ENV FABRIC_ORCHESTRATOR_HOST=orchestrator.fabric-testbed.net
 ENV HISTFILE=/work/.bash_history_docker
+ENV JUPYTER_THEME=${jupytertheme}
 
 # Install remaining packages:
 COPY ./requirements.txt ./
