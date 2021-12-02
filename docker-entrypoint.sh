@@ -36,6 +36,16 @@ then
   ssh-keygen -b 2048 -t rsa -f "$HOME/.ssh/id_rsa_fabric_slice" -q -N ""
 fi
 
+# Set up the examples:
+if [ -d "/work/examples" ]
+then
+  rm -rf "/work/examples"
+fi
+cp -rfp /docker/examples /work/examples
+
 # Start up Jupyter:
-jt -t $JUPYTER_THEME
+if [ $JUPYTER_THEME != "none" ]
+then
+  jt -t $JUPYTER_THEME
+fi
 jupyter notebook --no-browser --ip=0.0.0.0 --allow-root --notebook-dir=/work

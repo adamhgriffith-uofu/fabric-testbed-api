@@ -10,17 +10,24 @@ Containerized FABRIC Python API with Jupyter and SSH.
 
 The `Dockerfile` provides the following build arguments:
 
-| Name           | Required | Description                                                                                                                                                                                     |
-|----------------|----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `jupytertheme` | No       | The theme for the Jupyter notebook environment. If not specified this will be set to `monokai`. See [jupyterthemes](https://github.com/dunovank/jupyter-themes) for a list of available themes. |
-| `username`     | Yes      | The FABRIC API user name for FABRIC and the Bastion servers.                                                                                                                                    |
+| Name           | Required | Description                                                                                                                                                                                  |
+|----------------|----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `jupytertheme` | No       | The theme for the Jupyter notebook environment. If not specified this will be set to `none`. See [jupyterthemes](https://github.com/dunovank/jupyter-themes) for a list of available themes. |
+| `username`     | Yes      | The FABRIC API user name for FABRIC and the Bastion servers.                                                                                                                                 |
 ### Secrets
 
 > **_NOTE:_** All files added to `/<repo-location>/secrets` will be ignored by Git so don't worry :).
 
 #### FABRIC Token File
 
-Copy the FABRIC token expression to `/<repo-location>/secrets/tokens/experiment.json` before building the images (see [FABRIC Create Token](https://portal.fabric-testbed.net/experiments) for more information).
+> **_NOTE:_** If during an experiment you encounter a `CILOGON_REFRESH_TOKEN` error that usually indicates a token file or expiration problem.
+
+Fabric has 2 kinds of tokens stored in a single JSON file:
+
+ * **Identity:** required for Control/Measurement Framework APIs. Identity Token is valid upto an hour.
+ * **Refresh:** required to generate new Identity Tokens valid. Refresh Token is valid for 24 hours.
+
+Copy the FABRIC tokens to `/<repo-location>/secrets/tokens/experiment.json` before building the images (see [FABRIC Create Token](https://portal.fabric-testbed.net/experiments) for more information).
 
 #### SSH Key Files
 
@@ -69,6 +76,14 @@ Generating /root/.ssh/id_rsa_fabric_slice key pair on the fly...
         http://1234abc:8888/?token=asdfasdfasdf
      or http://127.0.0.1:8888/?token=asdfasdfasdf
 ```
+
+## Examples
+
+> **_NOTE:_** On each new container run examples from `/<repo-location>/examples` will overwrite `/work/examples` regardless of whether a volume exists at that location.
+
+| Name               | Description                                                                |
+|--------------------|----------------------------------------------------------------------------|
+| `make-slice.ipynb` | Create a sample slice on FABRIC and generate an Ansible `hosts.yaml` file. |
 
 ## SSH Commands
 

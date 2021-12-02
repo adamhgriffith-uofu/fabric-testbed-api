@@ -2,7 +2,7 @@
 FROM python:3.9.9-buster
 
 # Docker image arguments:
-ARG jupytertheme=monokai
+ARG jupytertheme=none
 ARG username
 
 # Docker container environmental variables:
@@ -24,11 +24,14 @@ RUN chmod +x ./docker-entrypoint.sh
 # Create the docker directory:
 RUN mkdir /docker
 
+# Add the Ansible template:
+COPY ./ansible ./docker/ansible
+
+# Add the examples:
+COPY ./examples ./docker/examples
+
 # Add the FABRIC API envs:
 COPY ./envs ./docker/envs
-
-# Add the FABRIC token(s):
-COPY ./secrets/tokens ./.fabric/tokens
 
 # Add the scripts:
 COPY ./scripts ./docker/scripts
@@ -36,6 +39,9 @@ RUN chmod +x ./docker/scripts/yml.sh
 
 # Change working directory:
 WORKDIR /root
+
+# Add the FABRIC token(s):
+COPY ./secrets/tokens ./.fabric/tokens
 
 # Set the SSH keys:
 COPY ./secrets/ssh ./.ssh/
