@@ -1,8 +1,8 @@
-# Fabric Python API and Jupyter
+# FABRIC Python API and Jupyter
 
 > **_IMPORTANT:_** This repository requires a read-through of [Install the FABRIC Python API](https://learn.fabric-testbed.net/knowledge-base/install-the-python-api/) in order to make any sense.
 
-Containerized Fabric Python API with Jupyter and SSH.
+Containerized FABRIC Python API with Jupyter and SSH.
 
 ## Requirements
 
@@ -13,18 +13,23 @@ The `Dockerfile` provides the following build arguments:
 | Name           | Required | Description                                                                                                                                                                                     |
 |----------------|----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `jupytertheme` | No       | The theme for the Jupyter notebook environment. If not specified this will be set to `monokai`. See [jupyterthemes](https://github.com/dunovank/jupyter-themes) for a list of available themes. |
-| `username`     | Yes      | The Fabric API user name for Fabric and the Bastion servers.                                                                                                                                    |
+| `username`     | Yes      | The FABRIC API user name for FABRIC and the Bastion servers.                                                                                                                                    |
+### Secrets
 
-### SSH Key Files
+> **_NOTE:_** All files added to `/<repo-location>/secrets` will be ignored by Git so don't worry :).
 
-> **_NOTE:_** All files added to `/<repo-location>/secrets/ssh` will be ignored by Git so don't worry :).
+#### FABRIC Token File
+
+Copy the FABRIC token expression to `/<repo-location>/secrets/tokens/experiment.json` before building the images (see [FABRIC Create Token](https://portal.fabric-testbed.net/experiments) for more information).
+
+#### SSH Key Files
 
 * During the build process Docker will copy relevant SSH keys into the image.
 * Please copy all required keys below to `/<repo-location>/secrets/ssh` before building the images.
 
 | Name                      | Required | Description                                                                                                                                  |
 |---------------------------|----------|----------------------------------------------------------------------------------------------------------------------------------------------|
-| `id_rsa_fabric`           | Yes      | Counterpart to the public key for Fabric and the Bastion servers.                                                                            |
+| `id_rsa_fabric`           | Yes      | Counterpart to the public key for FABRIC and the Bastion servers.                                                                            |
 | `id_rsa_fabric_slice`     | No       | Counterpart to the public key used when the slice is defined and requested. If not specified a new private key will be generated on the fly. |
 | `id_rsa_fabric_slice.pub` | No       | Counterpart to the private key used when the slice is defined and requested. If not specified a new public key will be generated on the fly. |
 
@@ -81,7 +86,7 @@ ssh <ssh-host>
 
 | SSH Hosts             | Description                       |
 |-----------------------|-----------------------------------|
-| `fabric-bastion-host` | External Fabric SSH Bastion host. |
+| `fabric-bastion-host` | External FABRIC SSH Bastion host. |
 
 * Not all Bastion hosts allow direct login. This is expected behavior.
 

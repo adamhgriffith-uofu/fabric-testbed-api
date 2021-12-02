@@ -20,7 +20,7 @@ export FABRIC_ORCHESTRATOR_HOST="${conf_fabric_orchestrator_hostname}"
 
 # Create the SSH configuration file:
 cat > "$HOME/.ssh/config" <<EOF
-### The External Fabric Bastion host
+### The External FABRIC Bastion host
 Host fabric-bastion-host
   HostName ${conf_fabric_bastion_hostname}
   Port ${conf_fabric_bastion_port}

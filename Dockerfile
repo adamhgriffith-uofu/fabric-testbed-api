@@ -8,6 +8,7 @@ ARG username
 # Docker container environmental variables:
 ENV FABRIC_API_USER=${username}
 ENV FABRIC_ENV=prod
+ENV FABRIC_TOKEN_LOCATION=/root/.fabric/tokens/experiment.json
 ENV HISTFILE=/work/.bash_history_docker
 ENV JUPYTER_THEME=${jupytertheme}
 
@@ -23,8 +24,11 @@ RUN chmod +x ./docker-entrypoint.sh
 # Create the docker directory:
 RUN mkdir /docker
 
-# Add the SLATE API envs:
+# Add the FABRIC API envs:
 COPY ./envs ./docker/envs
+
+# Add the FABRIC token(s):
+COPY ./secrets/tokens ./.fabric/tokens
 
 # Add the scripts:
 COPY ./scripts ./docker/scripts
