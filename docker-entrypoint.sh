@@ -27,9 +27,10 @@ UserKnownHostsFile /dev/null
 ### The External FABRIC Bastion host
 Host fabric-bastion-host
   HostName ${conf_fabric_bastion_hostname}
+  IdentitiesOnly yes
+  IdentityFile /root/.ssh/id_rsa_fabric
   Port ${conf_fabric_bastion_port}
   User ${FABRIC_API_USER}
-  IdentityFile /root/.ssh/id_rsa_fabric
 EOF
 
 # Create Slice key files:
