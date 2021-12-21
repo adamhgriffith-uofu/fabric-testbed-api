@@ -19,11 +19,11 @@ all:
         kube-master:
         kube-node:
       vars:
-        slate_cluster_name: Fabric-UC  # Choose any cluster name conforming to Kubernetes naming standards that doesn't already exist
-        slate_group_name: ssl  # Provide an already-existing SLATE group you belong to here
-        slate_org_name: uchicago  # Provide your organization name here
+        slate_cluster_name: test-xxxx  # Choose any cluster name conforming to Kubernetes naming standards that doesn't already exist
+        slate_group_name: slate-dev  # Provide an already-existing SLATE group you belong to here
+        slate_org_name: uutah  # Provide your organization name here
         docker_version: latest
-        calico_version: "v3.19.3"
+        calico_version: "v3.16.4"
         dns_min_replicas: 1
         supplementary_addresses_in_ssl_keys: ['{{hosts[0].pubip}}']
         ansible_ssh_common_args: '-J fabric-bastion-host -i {{ssh_key_file_priv}}'
