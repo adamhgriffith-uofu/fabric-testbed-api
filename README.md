@@ -16,7 +16,7 @@ The `Dockerfile` provides the following build arguments:
 | `username`     | Yes      | The FABRIC API user name for FABRIC and the Bastion servers.                                                                                                                                 |
 ### Secrets
 
-> **_NOTE:_** All files added to `/<repo-location>/secrets` will be ignored by Git so don't worry :).
+> **_NOTE:_** All files added to `${PWD}/secrets` will be ignored by Git so don't worry :).
 
 #### FABRIC Token File
 
@@ -27,12 +27,12 @@ Fabric has 2 kinds of tokens stored in a single JSON file:
  * **Identity:** required for Control/Measurement Framework APIs. Identity Token is valid upto an hour.
  * **Refresh:** required to generate new Identity Tokens valid. Refresh Token is valid for 24 hours.
 
-Copy the FABRIC tokens to `/<repo-location>/secrets/tokens/experiment.json` before building the images (see [FABRIC Create Token](https://portal.fabric-testbed.net/experiments) for more information).
+Copy the FABRIC tokens to `${PWD}/secrets/tokens/experiment.json` before building the images (see [FABRIC Create Token](https://portal.fabric-testbed.net/experiments) for more information).
 
 #### SSH Key Files
 
 * During the build process Docker will copy relevant SSH keys into the image.
-* Please copy all required keys below to `/<repo-location>/secrets/ssh` before building the images.
+* Please copy all required keys below to `${PWD}/secrets/ssh` before building the images.
 
 | Name                      | Required | Description                                                                                                                                  |
 |---------------------------|----------|----------------------------------------------------------------------------------------------------------------------------------------------|
@@ -43,7 +43,7 @@ Copy the FABRIC tokens to `/<repo-location>/secrets/tokens/experiment.json` befo
 * **Optional:** Create your own persistent slice keys:
 
   ```shell
-  ssh-keygen -b 2048 -t rsa -f "/<repo-location>/secrets/ssh/id_rsa_fabric_slice" -q -N ""
+  ssh-keygen -b 2048 -t rsa -f "${PWD}/secrets/ssh/id_rsa_fabric_slice" -q -N ""
   ```
 
 ## Build and Run
@@ -59,7 +59,7 @@ docker build --file Dockerfile --build-arg username=<username> --tag fabric-api:
 Running the image will create a new tagged container and start up Jupyter.
 
 ```shell
-[your@localmachine ~]$ docker run -it -p 8888:8888 -v /<repo-location>/work:/work fabric-api:prod
+[your@localmachine ~]$ docker run -it -p 8888:8888 -v ${PWD}/work:/work fabric-api:prod
 Existing Slice key not found.
 Generating /root/.ssh/id_rsa_fabric_slice key pair on the fly...
 [I 19:58:14.368 NotebookApp] Writing notebook server cookie secret to /root/.local/share/jupyter/runtime/notebook_cookie_secret
@@ -79,7 +79,7 @@ Generating /root/.ssh/id_rsa_fabric_slice key pair on the fly...
 
 ## Examples
 
-> **_NOTE:_** On each new container run examples from `/<repo-location>/examples` will overwrite `/work/examples` regardless of whether a volume exists at that location.
+> **_NOTE:_** On each new container run examples from `${PWD}/examples` will overwrite `/work/examples` regardless of whether a volume exists at that location.
 
 | Name               | Description                                                                |
 |--------------------|----------------------------------------------------------------------------|
