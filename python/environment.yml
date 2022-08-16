@@ -1,0 +1,9 @@
+# conda env create --file environment.yml
+name: slate-fabrictestbed
+channels:
+  - defaults
+dependencies:
+  - pip=21.2.4
+  - python=3.9.12
+  - pip:
+      - fabrictestbed-extensions==1.2.4
