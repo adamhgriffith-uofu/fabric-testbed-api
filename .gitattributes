@@ -3,5 +3,4 @@
 * text=auto
 
 # These files should have specific line endings
-*.j2    text eol=lf
 *.sh	text eol=lf
