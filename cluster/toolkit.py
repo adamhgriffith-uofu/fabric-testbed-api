@@ -1,3 +1,4 @@
+import datetime
 import cluster
 import os
 
@@ -30,16 +31,32 @@ def create_slice() -> str:
         raise ex
 
 
-def delete_slice():
+def delete_slice() -> None:
     """
     Delete the Slice in Fabric.
-    :return:
+    :return: None
     """
     try:
         cluster.logger.info(f'Deleting Slice: {cluster.slice_name}.')
         fabric_slice = cluster.fablib.get_slice(name=cluster.slice_name)
-        result = fabric_slice.delete()
-        return result
+        fabric_slice.delete()
+    except Exception as ex:
+        cluster.logger.error(f"Exception: {ex}")
+        raise ex
+
+
+def renew_slice(add_days: int) -> None:
+    """
+    Renew the Slice in Fabric by extending the lease end time.
+    :param add_days: Number of days from now to add to Slice lease
+    :return: None
+    """
+    cluster.logger.info(f'Renewing Slice: {cluster.slice_name}.')
+    end_date = (datetime.datetime.utcnow() + datetime.timedelta(days=add_days)).strftime("%Y-%m-%d %H:%M:%S")
+    cluster.logger.info(f'New lease end date will be: {end_date}.')
+    try:
+        fabric_slice = cluster.fablib.get_slice(name=cluster.slice_name)
+        fabric_slice.renew(end_date)
     except Exception as ex:
         cluster.logger.error(f"Exception: {ex}")
         raise ex
