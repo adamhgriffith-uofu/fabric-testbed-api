@@ -10,7 +10,7 @@ def create_slice() -> str:
     """
     try:
         # Create Slice:
-        cluster.logger.info('Submitting Slice request.')
+        cluster.logger.info(f'Submitting Slice request for "{cluster.slice_name}".')
         fabric_slice = cluster.fablib.new_slice(cluster.slice_name)
         node_ifaces = []
 
