@@ -2,11 +2,7 @@
 
 ## Configure FABlib Application
 
-Copy-paste `./fabric_config/fabric_rc.tmpl` to `./fabric_config/fabric_rc` and fill in the placeholder values. Finally, load the variables into the current Bash session:
-
-```shell
-source ./fabric_config/fabric_rc.py
-```
+Copy-paste `./fabric_config/fabric.conf.tmpl` to `./fabric_config/fabric.conf` and fill in the placeholder values.
 
 ## Bastion Key
 
