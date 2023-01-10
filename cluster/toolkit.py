@@ -71,7 +71,7 @@ def set_env_vars() -> None:
     cluster.logger.info('Setting up OS environmental variables for FABlib.')
     os.environ['FABRIC_CREDMGR_HOST'] = 'cm.fabric-testbed.net'
     os.environ['FABRIC_ORCHESTRATOR_HOST'] = 'orchestrator.fabric-testbed.net'
-    os.environ['FABRIC_BASTION_HOST'] = 'bastion-1.fabric-testbed.net'
+    os.environ['FABRIC_BASTION_HOST'] = 'bastion-2.fabric-testbed.net'
     os.environ['FABRIC_PROJECT_ID'] = cluster.config['secrets']['fabric_project_id']
     os.environ['FABRIC_BASTION_USERNAME'] = cluster.config['secrets']['fabric_bastion_username']
     os.environ['FABRIC_BASTION_KEY_LOCATION'] = f"{cluster.fabric_config_dir}/fabric-bastion-key"
@@ -80,3 +80,10 @@ def set_env_vars() -> None:
     os.environ['FABRIC_LOG_LEVEL'] = 'INFO'
     os.environ['FABRIC_LOG_FILE'] = f"{cluster.fabric_config_dir}/fablib.log"
     os.environ['FABRIC_TOKEN_LOCATION'] = f"{cluster.fabric_config_dir}/token.json"
+
+def set_ssh_config() -> None:
+    """
+    Set up an SSH config file for Fabric access via a shell.
+    :return: None
+    """
+    cluster.logger.info('Setting up SSH config file for Fabric access via a shell.')

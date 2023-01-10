@@ -37,6 +37,10 @@ try:
 except AttributeError:
     pass
 
+# Set up SSH config:
+
+
+
 __all__ = [
     'create_slice',
     'delete_slice',
